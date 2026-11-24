@@ -1,0 +1,27 @@
+# Secrets – nie committen
+.env
+.env.*
+!.env.example
+docker-compose.override.yml
+*.key
+*.pem
+secrets/
+
+# Daten und Logs liegen auf dem Tresor, nie im Repo
+data/
+*.db
+*.sqlite
+*.sqlite3
+*.log
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# System / Editor
+.DS_Store
+.vscode/

@@ -1,4 +1,4 @@
-# Secrets – nie committen
+# Secrets – never commit
 .env
 .env.*
 !.env.example
@@ -6,8 +6,9 @@ docker-compose.override.yml
 *.key
 *.pem
 secrets/
+.scan-patterns.local
 
-# Daten und Logs liegen auf dem Tresor, nie im Repo
+# Data and logs live outside the repo
 data/
 *.db
 *.sqlite
@@ -22,6 +23,6 @@ __pycache__/
 .ruff_cache/
 .mypy_cache/
 
-# System / Editor
+# OS / editor
 .DS_Store
 .vscode/

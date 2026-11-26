@@ -55,7 +55,7 @@ Requires Python 3.14.
 ```sh
 python3 -m venv .venv
 source .venv/bin/activate
-pip install --require-hashes -r backend/requirements.txt
+pip install --require-hashes -r backend/requirements-dev.txt
 ln -s ../../scripts/secret_scan.sh .git/hooks/pre-commit
 cp .env.example .env    # then adjust the values
 ```
@@ -71,7 +71,22 @@ python -m backend.config
 ```
 
 Tokens are printed once and never stored. Put them into the clients; if one is
-lost, create new ones with `--force`.
+lost, renew it with `--channel <name>` (or all with `--force`).
+
+## Running locally
+
+```sh
+python -m uvicorn backend.main:app --host 127.0.0.1 --port 8100 --no-server-header
+```
+
+Tokens are read at startup – restart the server after renewing one.
+Always start uvicorn via `python -m` so the virtual environment is used.
+
+## Tests
+
+```sh
+python -m pytest
+```
 
 ## Configuration
 
@@ -84,13 +99,17 @@ lost, create new ones with `--force`.
 
 ## Dependencies
 
-Edit `backend/requirements.in`, then regenerate the lockfile:
+Runtime dependencies go into `backend/requirements.in`, development-only
+tools into `backend/requirements-dev.in` (which includes the runtime list).
+Regenerate both lockfiles after every change:
 
 ```sh
 pip install pip-tools
 pip-compile --generate-hashes --strip-extras \
   -o backend/requirements.txt backend/requirements.in
-pip install --require-hashes -r backend/requirements.txt
+pip-compile --generate-hashes --strip-extras \
+  -o backend/requirements-dev.txt backend/requirements-dev.in
+pip install --require-hashes -r backend/requirements-dev.txt
 ```
 
 ## Secret scan

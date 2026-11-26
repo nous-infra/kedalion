@@ -1,30 +1,20 @@
-"""OpenAI-compatible chat endpoint – placeholder until the agent loop exists."""
+"""OpenAI-compatible chat endpoint.
 
-import time
-import uuid
+Placeholder until the agent loop exists: it validates the request and
+replies with the detected channel and the number of messages it would use.
+"""
 
 from fastapi import APIRouter
 
 from backend.api.auth import Channel
+from backend.api.schemas import ChatRequest, ChatResponse
 
 router = APIRouter(prefix="/v1")
 
 
 @router.post("/chat/completions")
-def chat_completions(channel: Channel) -> dict[str, object]:
-    return {
-        "id": f"chatcmpl-{uuid.uuid4().hex}",
-        "object": "chat.completion",
-        "created": int(time.time()),
-        "model": "kedalion",
-        "choices": [
-            {
-                "index": 0,
-                "message": {
-                    "role": "assistant",
-                    "content": f"Kedalion online (channel: {channel})",
-                },
-                "finish_reason": "stop",
-            }
-        ],
-    }
+def chat_completions(body: ChatRequest, channel: Channel) -> ChatResponse:
+    turns = body.conversation()
+    return ChatResponse.from_text(
+        f"Kedalion online (channel: {channel}, messages: {len(turns)})"
+    )

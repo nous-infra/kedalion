@@ -18,15 +18,16 @@ if [ -n "$BAD_FILES" ]; then
   FOUND=1
 fi
 
-# 2) Check content of all indexed files against both pattern lists
+# 2) Check content of all indexed files against both pattern lists.
+#    Pure pip hash lines (--hash=sha256:...) in lockfiles are skipped.
 for LIST in scripts/secret_patterns.txt .scan-patterns.local; do
   [ -f "$LIST" ] || continue
   PATTERNS="$(mktemp)"
   # Strip comments and blank lines (a blank pattern would match everything)
   grep -vE '^[[:space:]]*(#|$)' "$LIST" > "$PATTERNS"
   if [ -s "$PATTERNS" ]; then
-    HITS="$(git grep --cached -nIiE -f "$PATTERNS" -- . \
-      ':!scripts/secret_patterns.txt' ':!backend/requirements.txt' \
+    HITS="$(git grep --cached -nIiE -f "$PATTERNS" -- . ':!scripts/secret_patterns.txt' \
+      | grep -vE '^[^:]+:[0-9]+:[[:space:]]*--hash=sha256:[0-9a-f]{64}[[:space:]\\]*$' \
       | grep -v 'scan:allow')"
     if [ -n "$HITS" ]; then
       echo "BLOCKED – matches from $LIST:"

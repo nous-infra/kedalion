@@ -48,6 +48,10 @@ Each building block has exactly one job and lives in its own package.
 - **Supply chain.** Dependencies are pinned with hashes (`pip-tools`).
 - **Secret scan.** A pre-commit hook blocks secrets and forbidden files.
 
+## Documentation
+
+Start with [docs/index.md](docs/index.md).
+
 ## Development setup
 
 Requires Python 3.14.

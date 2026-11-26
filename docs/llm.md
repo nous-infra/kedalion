@@ -55,3 +55,21 @@ Response bodies are never shown – they could contain internal details.
 - Proxy environment variables are ignored, so requests cannot be redirected
   through the environment.
 - Redirects are not followed.
+
+## Testing the connection
+
+The model server only accepts connections from the Kedalion host. For
+development on another machine, use an SSH tunnel through that host:
+
+```sh
+ssh -p <ssh-port> -N -L 127.0.0.1:11435:<model-host>:11434 <user>@<kedalion-host>
+```
+
+Then set `KEDALION_OLLAMA_URL=http://127.0.0.1:11435` in `.env` and run:
+
+```sh
+python -m scripts.ask_model "Say hello in one short sentence."
+```
+
+The tunnel uses port 11435 on purpose: if Ollama also runs locally, it already
+uses 11434 – and Kedalion would silently talk to the wrong model.

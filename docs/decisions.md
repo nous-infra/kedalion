@@ -29,3 +29,4 @@ Why things are the way they are. Newest at the bottom.
 | Async model client | Tools (MCP) will be async too |
 | Proxy variables ignored for model requests | Requests to the model cannot be redirected through the environment |
 | Model errors never include response bodies | They could contain internal details |
+| Development tunnel on local port 11435 | A local Ollama on the dev machine already uses 11434 – avoids talking to the wrong model |

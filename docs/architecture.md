@@ -31,7 +31,7 @@ Each package has exactly one job.
 |---------|-----|--------|
 | `api` | Receives requests, checks the token, enforces the request rules | Built (chat answer is a placeholder) |
 | `agent` | Asks the model, runs tool calls, decides when the answer is done | Planned |
-| `llm` | The only place that talks to Ollama. Changing the model only touches this package | Planned |
+| `llm` | The only place that talks to Ollama. Changing the model only touches this package | Client built, not yet used by the API |
 | `tools` | Connects to tools via MCP – Home Assistant first, more apps later | Planned |
 | `permissions` | Checks every tool call, independently of the model | Planned |
 | `memory` | Profile and long-term memory | Planned |

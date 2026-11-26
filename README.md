@@ -98,6 +98,7 @@ python -m pytest
 |-----------------------------|-------------------------------------|----------------|
 | `KEDALION_OLLAMA_URL`       | Ollama base URL                     | –              |
 | `KEDALION_OLLAMA_MODEL`     | Model name                          | –              |
+| `KEDALION_OLLAMA_TIMEOUT_SECONDS` | Max. seconds to wait for an answer | `120` |
 | `KEDALION_SECRETS_DIR`      | Directory containing `hmac_key`     | `/run/secrets` |
 | `KEDALION_AUTH_CONFIG_PATH` | JSON file with channel digests      | –              |
 

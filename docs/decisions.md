@@ -24,3 +24,8 @@ Why things are the way they are. Newest at the bottom.
 | All files in English | The repository may become public |
 | Private repository in its own GitHub organization | Groups related repos; can go public after a review |
 | Pre-commit secret scan with local personal patterns | Catches mistakes before they enter git history |
+| Ollama's own chat API instead of its OpenAI-compatible one | Supports options like turning off "thinking" |
+| `httpx2` as runtime HTTP client | Same library as the tests; maintained by the Pydantic team |
+| Async model client | Tools (MCP) will be async too |
+| Proxy variables ignored for model requests | Requests to the model cannot be redirected through the environment |
+| Model errors never include response bodies | They could contain internal details |

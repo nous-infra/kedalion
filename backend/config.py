@@ -39,6 +39,7 @@ class Settings(BaseSettings):
 
     ollama_url: AnyHttpUrl
     ollama_model: str = Field(min_length=1)
+    ollama_timeout_seconds: float = Field(default=120, gt=0, le=600)
     secrets_dir: Path = Path("/run/secrets")
     auth_config_path: Path
 
